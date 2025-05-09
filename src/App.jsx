@@ -11,7 +11,24 @@ function App() {
 
   return (
     <>
-
+      <div className="container">
+        <h1>
+          List Item
+        </h1>
+        <ul className="list-group mb-4">
+          {listItems.map((item) => (
+            <li key={item.id} className="list-group">
+              {item.name}
+            </li>
+          ))}
+          <form>
+            <div className="input-group mt-5">
+              <input type="text" className='form-control' placeholder='New Item' />
+              <button className="btn btn-primary">Add</button>
+            </div>
+          </form>
+        </ul>
+      </div>
     </>
   )
 }
