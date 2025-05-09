@@ -11,6 +11,10 @@ function App() {
 
   const [newItem, setNewItem] = useState('');
 
+  const addItem = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <>
       <div className="container">
@@ -23,9 +27,15 @@ function App() {
               {item.name}
             </li>
           ))}
-          <form>
+          <form onSubmit={addItem}>
             <div className="input-group mt-5">
-              <input type="text" className='form-control' placeholder='New Item' />
+              <input
+                value={newItem}
+                onChange={(e) => { setNewItem(e.target.value) }}
+                type="text"
+                className='form-control'
+                placeholder='New Item'
+              />
               <button className="btn btn-primary">Add</button>
             </div>
           </form>
