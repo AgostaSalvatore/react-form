@@ -1,45 +1,42 @@
-import { useState } from 'react'
-const listItems = [
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' },
-  { id: 3, name: 'Item 3' },
-  { id: 4, name: 'Item 4' },
-  { id: 5, name: 'Item 5' },
-];
+import { useState } from 'react';
+
+const InitialItems = ['item 1', 'item 2', 'item 3', 'item 4', 'item 5'];
 
 function App() {
-
   const [newItem, setNewItem] = useState('');
+  const [item, setItem] = useState(InitialItems);
 
   const addItem = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //per non refreshare la pagina
+    const items = newItem.trim(); //toglie gli spazi prima e dopo
+    setItem([...item, items]); //operatore spread
+    setNewItem(''); //andare a pulire la form
   }
 
   return (
     <>
       <div className="container">
-        <h1>
-          List Item
+        <h1 className='mb-3'>
+          Item
         </h1>
         <ul className="list-group mb-4">
-          {listItems.map((item) => (
-            <li key={item.id} className="list-group">
-              {item.name}
+          {item.map((item, index) => (
+            <li key={index} className="list-group-item bg-secondary">
+              {item}
             </li>
           ))}
-          <form onSubmit={addItem}>
-            <div className="input-group mt-5">
-              <input
-                value={newItem}
-                onChange={(e) => { setNewItem(e.target.value) }}
-                type="text"
-                className='form-control'
-                placeholder='New Item'
-              />
-              <button className="btn btn-primary">Add</button>
-            </div>
-          </form>
         </ul>
+        <form onSubmit={addItem}>
+          <div className="input-group mb-3">
+            <input
+              value={newItem}
+              onChange={(e) => { setNewItem(e.target.value) }}
+              type="text"
+              className='form-control'
+              placeholder='Nuovo Item' />
+            <button className="btn btn-primary">Aggiungi</button>
+          </div>
+        </form>
       </div>
     </>
   )
