@@ -9,6 +9,8 @@ const listItems = [
 
 function App() {
 
+  const [newItem, setNewItem] = useState('');
+
   return (
     <>
       <div className="container">
