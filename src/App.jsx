@@ -13,6 +13,12 @@ function App() {
     setNewItem(''); //andare a pulire la form
   }
 
+  const handleRemoveItem = (index) => {
+    const updatedItems = [...item];
+    updatedItems.splice(index, 1);
+    setItem(updatedItems);
+  }
+
   return (
     <>
       <div className="container">
@@ -21,8 +27,15 @@ function App() {
         </h1>
         <ul className="list-group mb-4">
           {item.map((item, index) => (
-            <li key={index} className="list-group-item bg-secondary">
+            <li key={index} className="list-group-item bg-secondary d-flex justify-content-between align-items-center">
               {item}
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => {
+                  handleRemoveItem(index);
+                }}>
+                <i className="fa-solid fa-trash"></i>
+              </button>
             </li>
           ))}
         </ul>
